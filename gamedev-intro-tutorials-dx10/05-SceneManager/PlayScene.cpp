@@ -10,6 +10,7 @@
 #include "Coin.h"
 #include "Platform.h"
 #include "NewBrick.h"
+#include "ColorBox.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -128,14 +129,24 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		float cell_width = (float)atof(tokens[3].c_str());
 		float cell_height = (float)atof(tokens[4].c_str());
 		int length = atoi(tokens[5].c_str());
-		int sprite_begin = atoi(tokens[6].c_str());
-		int sprite_middle = atoi(tokens[7].c_str());
-		int sprite_end = atoi(tokens[8].c_str());
 
 		obj = new CPlatform(
 			x, y,
-			cell_width, cell_height, length,
-			sprite_begin, sprite_middle, sprite_end
+			cell_width, cell_height, length
+		);
+
+		break;
+	}
+	case OBJECT_TYPE_COLORBOX:
+	{
+
+		float cell_width = (float)atof(tokens[3].c_str());
+		float cell_height = (float)atof(tokens[4].c_str());
+		int length = atoi(tokens[5].c_str());
+
+		obj = new CColorBox(
+			x, y,
+			cell_width, cell_height, length
 		);
 
 		break;
@@ -192,7 +203,8 @@ void CPlayScene::LoadAssets(LPCWSTR assetFile)
 		case ASSETS_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
 		}
 	}
-
+	map = new Map();
+	map->LoadMapfromTMX("textures\\untitled.tmx", "textures\\");
 	f.close();
 
 	DebugOut(L"[INFO] Done loading assets from %s\n", assetFile);
@@ -269,6 +281,7 @@ void CPlayScene::Update(DWORD dt)
 
 void CPlayScene::Render()
 {
+	map->Render();
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
 }

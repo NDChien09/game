@@ -7,7 +7,7 @@ brick.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
-# type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Koopas, 10 = NewBrick
+# type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Koopas, 6 = ColorBox, 10 = NewBrick
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # MARIO
@@ -42,9 +42,26 @@ brick.txt
 4	180	100
 
 #Platform
-5	100	180	16	15	32	51000	52000	53000
-5	140	160	16	15	2	51000	52000	53000
+5	0	176	16	16	39
+5	624	160	16	16	30
+5	624	176	16	16	30
+5	1168	176	16	16	22
+5	1552	176	16	16	5
+5	1680	176	16	16	36
+5	2272	176	16	16	34
 
+5	1520	96	16	16	2
+5	1616	128	16	16	1
+5	1600	144	16	16	2
+5	1584	160	16	16	3
+5	1680	160	16	16	3
+5	1680	144	16	16	2
+5	1680	128	16	16	1
+5	2272	64	16	16	2
+5	2272	128	16	16	2
+
+#Colorbox
+6	240	128	16	16	3
 #Portal 
-50	200	160	216	180	1
+#50	200	160	216	180	1
 

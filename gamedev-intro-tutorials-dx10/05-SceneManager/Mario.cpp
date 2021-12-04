@@ -9,6 +9,7 @@
 #include "Portal.h"
 
 #include "Collision.h"
+#include "ColorBox.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
@@ -37,6 +38,18 @@ void CMario::OnNoCollision(DWORD dt)
 
 void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 {
+	if (dynamic_cast<CColorBox*>(e->obj))
+	{
+		CColorBox* cbox = dynamic_cast<CColorBox*>(e->obj);
+		if (e->ny < 0)
+		{
+			cbox->SetBlocking(1);
+			//bounce
+			this->y -= 7;
+		}
+		else
+			cbox->SetBlocking(0);
+	}
 	if (e->ny != 0 && e->obj->IsBlocking())
 	{
 		vy = 0;
