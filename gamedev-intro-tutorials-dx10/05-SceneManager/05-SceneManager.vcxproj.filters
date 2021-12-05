@@ -105,6 +105,9 @@
     <ClCompile Include="Colorbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QuestionBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -192,6 +195,9 @@
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="ColorBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestionBlock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
