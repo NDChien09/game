@@ -81,9 +81,6 @@
     <ClCompile Include="Portal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NewBrick.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tinyxml\tinystr.cpp">
       <Filter>TinyXML</Filter>
     </ClCompile>
@@ -177,9 +174,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Portal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NewBrick.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tinyxml\tinystr.h">
