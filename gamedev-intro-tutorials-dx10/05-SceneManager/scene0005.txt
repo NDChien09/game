@@ -6,6 +6,7 @@ cloud.txt
 brick.txt
 questionblock.txt
 goomba.txt
+koopas.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
@@ -44,7 +45,7 @@ goomba.txt
 2	880	384
 
 # KOOPAS
-
+3	577	360
 
 # COIN
 4	1072	320
