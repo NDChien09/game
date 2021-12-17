@@ -8,6 +8,7 @@
 #include "Coin.h"
 #include "Portal.h"
 #include "Koopas.h"
+#include "Pipe.h"
 
 #include "Collision.h"
 #include "ColorBox.h"
@@ -61,10 +62,33 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		vx = 0;
 	}
+	
+	if (dynamic_cast<CPipe*>(e->obj))
+	{
+		CPipe* cpipe = dynamic_cast<CPipe*>(e->obj);
+		if (e->ny < 0)
+		{
+			cpipe->SetBlocking(1);
+			//bounce
+			this->y -= 8;
+		}
+		else
+			cpipe->SetBlocking(0);
+	}
+	if (e->ny != 0 && e->obj->IsBlocking())
+	{
+		vy = 0;
+		if (e->ny < 0) isOnPlatform = true;
+	}
+	else 
+	if (e->nx != 0 && e->obj->IsBlocking())
+	{
+		vx = 0;
+	}
 
 	if (dynamic_cast<CGoomba*>(e->obj))
 		OnCollisionWithGoomba(e);
-	else if (dynamic_cast<CGoomba*>(e->obj))
+	else if (dynamic_cast<CKoopas*>(e->obj))
 		OnCollisionWithKoopas(e);
 	else if (dynamic_cast<CCoin*>(e->obj))
 		OnCollisionWithCoin(e);
