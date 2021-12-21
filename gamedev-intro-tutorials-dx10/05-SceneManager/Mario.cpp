@@ -8,7 +8,6 @@
 #include "Coin.h"
 #include "Portal.h"
 #include "Koopas.h"
-#include "Pipe.h"
 
 #include "Collision.h"
 #include "ColorBox.h"
@@ -63,28 +62,6 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		vx = 0;
 	}
 	
-	if (dynamic_cast<CPipe*>(e->obj))
-	{
-		CPipe* cpipe = dynamic_cast<CPipe*>(e->obj);
-		if (e->ny < 0)
-		{
-			cpipe->SetBlocking(1);
-			//bounce
-			this->y -= 8;
-		}
-		else
-			cpipe->SetBlocking(0);
-	}
-	if (e->ny != 0 && e->obj->IsBlocking())
-	{
-		vy = 0;
-		if (e->ny < 0) isOnPlatform = true;
-	}
-	else 
-	if (e->nx != 0 && e->obj->IsBlocking())
-	{
-		vx = 0;
-	}
 
 	if (dynamic_cast<CGoomba*>(e->obj))
 		OnCollisionWithGoomba(e);
@@ -141,23 +118,24 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 			koopas->SetState(KOOPAS_STATE_DIE);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
+		else
+		{
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
 	}
 	else // hit by Koopas
 	{
 		if (untouchable == 0)
 		{
-			if (koopas->GetState() != KOOPAS_STATE_DIE)
+			if (level > MARIO_LEVEL_SMALL)
 			{
-				if (level > MARIO_LEVEL_SMALL)
-				{
-					level = MARIO_LEVEL_SMALL;
-					StartUntouchable();
-				}
-				else
-				{
-					DebugOut(L">>> Mario DIE >>> \n");
-					SetState(MARIO_STATE_DIE);
-				}
+				level = MARIO_LEVEL_SMALL;
+				StartUntouchable();
+			}
+			else
+			{
+				DebugOut(L">>> Mario DIE >>> \n");
+				SetState(MARIO_STATE_DIE);
 			}
 		}
 	}

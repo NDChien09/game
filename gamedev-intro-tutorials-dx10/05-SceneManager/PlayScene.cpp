@@ -145,10 +145,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		float cell_width = (float)atof(tokens[3].c_str());
 		float cell_height = (float)atof(tokens[4].c_str());
 		int length = atoi(tokens[5].c_str());
+		int height = atoi(tokens[6].c_str());
 
 		obj = new CPipe(
 			x, y,
-			cell_width, cell_height, length
+			cell_width, cell_height, length, height
 		);
 
 		break;
