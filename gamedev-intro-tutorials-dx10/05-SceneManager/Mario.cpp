@@ -120,6 +120,7 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 		}
 		else
 		{
+			koopas->SetSpeed(0.2f, 0);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
 	}

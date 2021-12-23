@@ -11,7 +11,8 @@ koopas.txt
 [OBJECTS]
 # type	x	y	extra_settings per object type
 # type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Koopas, 4 = Coin,
-5 = Platform, 6 = ColorBox, 7 = QuestionBlock, 8 = Pipe
+5 = Platform, 6 = ColorBox, 7 = QuestionBlock, 8 = Pipe, 20 = Paragoomba,
+9 = FirePlant
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # MARIO
@@ -43,6 +44,9 @@ koopas.txt
 2	528	400
 2	832	384
 2	880	384
+
+# PARAGOOMBA
+#20	944	382
 
 # KOOPAS
 3	577	360
@@ -122,6 +126,9 @@ koopas.txt
 8	2256	112	16	16	2	12
 8	2256	384	16	16	2	2
 8	2320	384	16	16	2	2
+
+# FIREPLANT
+9	360	336
 # Portal 
 #50	200	160	216	180	1
 
