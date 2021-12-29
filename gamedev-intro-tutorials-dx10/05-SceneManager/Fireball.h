@@ -17,10 +17,7 @@ class CFireball : public CGameObject
 	float ay;
 
 public:
-	CFireball(float x, float y) : CGameObject(x, y)
-	{
-
-	}
+	CFireball(float x, float y);
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
 
