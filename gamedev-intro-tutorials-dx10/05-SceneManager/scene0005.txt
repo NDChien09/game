@@ -9,12 +9,13 @@ goomba.txt
 koopas.txt
 fireplant.txt
 paragoomba.txt
+parakoopas.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
 # type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Koopas, 4 = Coin,
 5 = Platform, 6 = ColorBox, 7 = QuestionBlock, 8 = Pipe, 20 = Paragoomba,
-9 = FirePlant
+9 = FirePlant, 30 = Parakoopas
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # MARIO
@@ -48,10 +49,15 @@ paragoomba.txt
 2	880	384
 
 # PARAGOOMBA
-#20	944	382
+20	944	382
 
 # KOOPAS
 3	577	360
+
+# PARAKOOPAS
+30	1328	293
+30	1376	293
+30	1424	293
 
 # COIN
 4	1072	320

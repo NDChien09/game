@@ -2,7 +2,7 @@
 
 CFirePlant::CFirePlant(float x, float y) :CGameObject(x, y)
 {
-	EntityTag = Tag::enemy;
+	
 }
 
 void CFirePlant::GetBoundingBox(float& left, float& top, float& right, float& bottom)
