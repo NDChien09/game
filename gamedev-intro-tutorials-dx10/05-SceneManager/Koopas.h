@@ -12,18 +12,17 @@
 #define KOOPAS_DIE_TIMEOUT 500
 
 #define KOOPAS_STATE_WALKING 100
-#define KOOPAS_STATE_DIE 200
+#define KOOPAS_STATE_SHELL 200
 
-#define ID_ANI_KOOPAS_WALKING 6000
-#define ID_ANI_KOOPAS_DIE 6001
+#define ID_ANI_KOOPAS_WALKING_LEFT 6000
+#define ID_ANI_KOOPAS_WALKING_RIGHT 6002
+#define ID_ANI_KOOPAS_SHELL 6001
 
 class CKoopas : public CGameObject
 {
 protected:
 	float ax;
 	float ay;
-
-	ULONGLONG die_start;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

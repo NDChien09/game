@@ -25,7 +25,7 @@ void CFirePlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CFirePlant::Render()
 {
-	int aniId = ID_ANI_FIREPLANT_MOVE;
+	int aniId = ID_ANI_FIREPLANT_MOVELEFT;
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
 }

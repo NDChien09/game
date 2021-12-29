@@ -7,6 +7,8 @@ brick.txt
 questionblock.txt
 goomba.txt
 koopas.txt
+fireplant.txt
+paragoomba.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type

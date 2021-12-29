@@ -5,7 +5,7 @@
 #define FIREPLANT_BBOX_WIDTH 16
 #define FIREPLANT_BBOX_HEIGHT 32
 
-#define ID_ANI_FIREPLANT_MOVE 7000
+#define ID_ANI_FIREPLANT_MOVELEFT 9000
 
 class CFirePlant : public CGameObject
 {
