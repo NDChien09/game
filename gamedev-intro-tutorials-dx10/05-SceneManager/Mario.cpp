@@ -8,6 +8,8 @@
 #include "Coin.h"
 #include "Portal.h"
 #include "Koopas.h"
+#include "Paragoomba.h"
+#include "Parakoopas.h"
 
 #include "Collision.h"
 #include "ColorBox.h"
@@ -67,6 +69,10 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithGoomba(e);
 	else if (dynamic_cast<CKoopas*>(e->obj))
 		OnCollisionWithKoopas(e);
+	else if (dynamic_cast<CParagoomba*>(e->obj))
+		OnCollisionWithParagoomba(e);
+	else if (dynamic_cast<CParakoopas*>(e->obj))
+		OnCollisionWithParakoopas(e);
 	else if (dynamic_cast<CCoin*>(e->obj))
 		OnCollisionWithCoin(e);
 	else if (dynamic_cast<CPortal*>(e->obj))
@@ -105,8 +111,43 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 			}
 		}
 	}
+}
 
-}void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
+void CMario::OnCollisionWithParagoomba(LPCOLLISIONEVENT e)
+{
+	CParagoomba* paragoomba = dynamic_cast<CParagoomba*>(e->obj);
+
+	// jump on top >> kill Goomba and deflect a bit 
+	if (e->ny < 0)
+	{
+		if (paragoomba->GetState() != PARAGOOMBA_STATE_DIE)
+		{
+			paragoomba->SetState(PARAGOOMBA_STATE_DIE);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else // hit by Goomba
+	{
+		if (untouchable == 0)
+		{
+			if (paragoomba->GetState() != PARAGOOMBA_STATE_DIE)
+			{
+				if (level > MARIO_LEVEL_SMALL)
+				{
+					level = MARIO_LEVEL_SMALL;
+					StartUntouchable();
+				}
+				else
+				{
+					DebugOut(L">>> Mario DIE >>> \n");
+					SetState(MARIO_STATE_DIE);
+				}
+			}
+		}
+	}
+}
+
+void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 {
 	CKoopas* koopas = dynamic_cast<CKoopas*>(e->obj);
 
@@ -121,6 +162,41 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 		else
 		{
 			koopas->SetSpeed(0.2f, 0);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else // hit by Koopas
+	{
+		if (untouchable == 0)
+		{
+			if (level > MARIO_LEVEL_SMALL)
+			{
+				level = MARIO_LEVEL_SMALL;
+				StartUntouchable();
+			}
+			else
+			{
+				DebugOut(L">>> Mario DIE >>> \n");
+				SetState(MARIO_STATE_DIE);
+			}
+		}
+	}
+}
+
+void CMario::OnCollisionWithParakoopas(LPCOLLISIONEVENT e)
+{
+	CParakoopas* parakoopas = dynamic_cast<CParakoopas*>(e->obj);
+
+	// jump on top >> kill Koopas and deflect a bit 
+	if (e->ny < 0)
+	{
+		if (parakoopas->GetState() != KOOPAS_STATE_SHELL)
+		{
+			parakoopas->SetState(KOOPAS_STATE_SHELL);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+		else
+		{
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
 	}

@@ -10,6 +10,7 @@ koopas.txt
 fireplant.txt
 paragoomba.txt
 parakoopas.txt
+fireball.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
@@ -19,8 +20,8 @@ parakoopas.txt
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # MARIO
-0	120	100
-
+#0	120	100
+0	1400	100
 # BRICK
 1	1952	400
 1	1968	400
