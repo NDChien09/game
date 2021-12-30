@@ -9,8 +9,11 @@
 #define PARAGOOMBA_BBOX_HEIGHT 14
 
 #define PARAGOOMBA_STATE_WALKING 100
-#define PARAGOOMBA_STATE_JUMP 300
-#define PARAGOOMBA_STATE_DIE 200
+#define PARAGOOMBA_STATE_JUMP 500
+#define PARAGOOMBA_STATE_DIE 300
+#define PARAGOOMBA_STATE_DEAD 400
+
+#define PARAGOOMBA_DIE_TIMEOUT 500
 
 #define ID_ANI_PARAGOOMBA_WALKING 5002
 #define ID_ANI_PARAGOOMBA_JUMP 5003
@@ -20,7 +23,8 @@ class CParagoomba : public CGameObject
 protected:
 	float ax;
 	float ay;
-	ULONGLONG timer;
+	ULONGLONG jump_timer;
+	ULONGLONG die_timer;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

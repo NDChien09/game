@@ -6,7 +6,7 @@ CParagoomba::CParagoomba(float x, float y) :CGameObject(x, y)
 	this->ax = 0;
 	this->ay = PARAGOOMBA_GRAVITY;
 	SetState(PARAGOOMBA_STATE_WALKING);
-	timer = 0;
+	jump_timer = 0;
 }
 
 void CParagoomba::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -46,10 +46,15 @@ void CParagoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
-	if (GetTickCount64() - timer > 2000)
+	if (GetTickCount64() - jump_timer > 2000)
 	{
-		timer = GetTickCount64();
+		jump_timer = GetTickCount64();
 		vy = -0.3f;
+	}
+	if ((state == PARAGOOMBA_STATE_DEAD) && (GetTickCount64() - die_timer > PARAGOOMBA_DIE_TIMEOUT))
+	{
+		isDeleted = true;
+		return;
 	}
 
 	CGameObject::Update(dt, coObjects);
@@ -69,6 +74,10 @@ void CParagoomba::Render()
 	{
 		aniId = ID_ANI_PARAGOOMBA_JUMP;
 	}
+	else if (state == PARAGOOMBA_STATE_DEAD)
+	{
+		aniId = ID_ANI_GOOMBA_DIE;
+	}
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
@@ -79,17 +88,21 @@ void CParagoomba::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
-	case GOOMBA_STATE_DIE:
-		y += (GOOMBA_BBOX_HEIGHT - GOOMBA_BBOX_HEIGHT_DIE) / 2;
-		vx = 0;
-		vy = 0;
-		ay = 0;
+	case PARAGOOMBA_STATE_DIE:
+		vx = -GOOMBA_STATE_WALKING;
 		break;
 	case PARAGOOMBA_STATE_WALKING:
 		vx = -PARAGOOMBA_WALKING_SPEED;
 		break;
 	case PARAGOOMBA_STATE_JUMP:
 		vx = -PARAGOOMBA_WALKING_SPEED;
+		break;
+	case PARAGOOMBA_STATE_DEAD:
+		die_timer = GetTickCount64();
+		y += (GOOMBA_BBOX_HEIGHT - GOOMBA_BBOX_HEIGHT_DIE) / 2;
+		vx = 0;
+		vy = 0;
+		ay = 0;
 		break;
 	}
 }

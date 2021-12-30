@@ -85,6 +85,12 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{8f979b43-9f85-40c3-ad28-2a2dfc28b196}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects\Pickable\Mushroom">
+      <UniqueIdentifier>{a2f32a48-6644-4e0d-a005-9b50ae524f88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Pickable\Leaf">
+      <UniqueIdentifier>{5a4efcbb-df2b-4ea0-9724-4a86329dae4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -189,6 +195,9 @@
     </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Mushroom.cpp">
+      <Filter>GameObjects\Pickable\Mushroom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +306,9 @@
     </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Mushroom.h">
+      <Filter>GameObjects\Pickable\Mushroom</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

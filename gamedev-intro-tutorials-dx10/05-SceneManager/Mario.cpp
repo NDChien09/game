@@ -6,6 +6,7 @@
 
 #include "Goomba.h"
 #include "Coin.h"
+#include "Mushroom.h"
 #include "Portal.h"
 #include "Koopas.h"
 #include "Paragoomba.h"
@@ -75,6 +76,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithParakoopas(e);
 	else if (dynamic_cast<CCoin*>(e->obj))
 		OnCollisionWithCoin(e);
+	else if (dynamic_cast<CMushroom*>(e->obj))
+		OnCollisionWithMushroom(e);
 	else if (dynamic_cast<CPortal*>(e->obj))
 		OnCollisionWithPortal(e);
 }
@@ -120,9 +123,14 @@ void CMario::OnCollisionWithParagoomba(LPCOLLISIONEVENT e)
 	// jump on top >> kill Goomba and deflect a bit 
 	if (e->ny < 0)
 	{
-		if (paragoomba->GetState() != PARAGOOMBA_STATE_DIE)
+		if (paragoomba->GetState() == PARAGOOMBA_STATE_WALKING && paragoomba->GetState() == PARAGOOMBA_STATE_JUMP)
 		{
 			paragoomba->SetState(PARAGOOMBA_STATE_DIE);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+		else if (paragoomba->GetState() == PARAGOOMBA_STATE_DIE)
+		{
+			paragoomba->SetState(PARAGOOMBA_STATE_DEAD);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
 	}
@@ -130,7 +138,7 @@ void CMario::OnCollisionWithParagoomba(LPCOLLISIONEVENT e)
 	{
 		if (untouchable == 0)
 		{
-			if (paragoomba->GetState() != PARAGOOMBA_STATE_DIE)
+			if (paragoomba->GetState() != PARAGOOMBA_STATE_DEAD)
 			{
 				if (level > MARIO_LEVEL_SMALL)
 				{
@@ -222,6 +230,13 @@ void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 {
 	e->obj->Delete();
 	coin++;
+}
+
+void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e)
+{
+	e->obj->Delete();
+	level = MARIO_LEVEL_BIG;
+	StartUntouchable();
 }
 
 void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)

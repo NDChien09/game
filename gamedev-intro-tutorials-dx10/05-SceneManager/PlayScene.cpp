@@ -8,6 +8,7 @@
 #include "Sprites.h"
 #include "Portal.h"
 #include "Coin.h"
+#include "Mushroom.h"
 #include "Platform.h"
 #include "ColorBox.h"
 #include "QuestionBlock.h"

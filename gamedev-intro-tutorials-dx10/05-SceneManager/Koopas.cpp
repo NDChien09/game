@@ -5,6 +5,7 @@ CKoopas::CKoopas(float x, float y) :CGameObject(x, y)
 	this->ax = 0;
 	this->ay = KOOPAS_GRAVITY;
 	SetState(KOOPAS_STATE_WALKING);
+	shell_timer = 0;
 }
 
 void CKoopas::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -50,6 +51,10 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
+	if (GetTickCount64() - shell_timer > 4000)
+	{
+		SetState(KOOPAS_STATE_WALKING);
+	}
 
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -59,11 +64,7 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void CKoopas::Render()
 {
 	int aniId = -1;
-	if (nx >= 0)
-	{
-		aniId = ID_ANI_KOOPAS_WALKING_RIGHT;
-	}
-	else aniId = ID_ANI_KOOPAS_WALKING_LEFT;
+	aniId = ID_ANI_KOOPAS_WALKING_LEFT;
 	if (state == KOOPAS_STATE_SHELL)
 	{
 		aniId = ID_ANI_KOOPAS_SHELL;
@@ -79,6 +80,7 @@ void CKoopas::SetState(int state)
 	switch (state)
 	{
 	case KOOPAS_STATE_SHELL:
+		shell_timer = GetTickCount64();
 		y += (KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_DIE) / 2;
 		vx = 0;
 		vy = 0;
